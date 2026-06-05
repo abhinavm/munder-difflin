@@ -156,7 +156,9 @@ export class PtyManager {
 
       return { ok: true };
     } catch (e) {
-      return { ok: false, error: e instanceof Error ? e.message : String(e) };
+      const msg = e instanceof Error ? e.message : String(e);
+      console.error('[pty:spawn] failed:', msg, 'resolved:', resolved, 'cwd:', opts.cwd);
+      return { ok: false, error: msg };
     }
   }
 
